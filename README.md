@@ -2,15 +2,17 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/davidrudlstorfer/obscura/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                             |    Stmts |     Miss |   Cover |   Missing |
-|--------------------------------- | -------: | -------: | ------: | --------: |
-| src/obscura/\_\_init\_\_.py      |        0 |        0 |    100% |           |
-| src/obscura/core/\_\_init\_\_.py |        0 |        0 |    100% |           |
-| src/obscura/core/example.py      |        2 |        0 |    100% |           |
-| src/obscura/core/run.py          |       12 |        0 |    100% |           |
-| src/obscura/core/utilities.py    |       33 |        2 |     94% |     92-93 |
-| src/obscura/main.py              |       18 |        0 |    100% |           |
-|                        **TOTAL** |   **65** |    **2** | **97%** |           |
+| Name                                      |    Stmts |     Miss |   Cover |   Missing |
+|------------------------------------------ | -------: | -------: | ------: | --------: |
+| src/obscura/\_\_init\_\_.py               |        0 |        0 |    100% |           |
+| src/obscura/core/\_\_init\_\_.py          |        0 |        0 |    100% |           |
+| src/obscura/core/convert\_vtu\_to\_stl.py |       15 |       15 |      0% |      3-26 |
+| src/obscura/core/example.py               |        2 |        0 |    100% |           |
+| src/obscura/core/parametric\_render.py    |       92 |       92 |      0% |     3-156 |
+| src/obscura/core/run.py                   |       12 |        0 |    100% |           |
+| src/obscura/core/utilities.py             |       33 |        2 |     94% |     92-93 |
+| src/obscura/main.py                       |       18 |        0 |    100% |           |
+|                                 **TOTAL** |  **172** |  **109** | **37%** |           |
 
 
 ## Setup coverage badge
