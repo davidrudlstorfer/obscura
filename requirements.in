@@ -1,0 +1,9 @@
+# This file contains all the requirements for PySkel
+munch
+numba
+numpy
+pdoc
+pre-commit
+pyfiglet
+pytest-cov
+pyyaml
