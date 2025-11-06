@@ -1,4 +1,4 @@
-# This file contains all the requirements for PySkel
+# This file contains all the requirements for Obscura
 munch
 numba
 numpy

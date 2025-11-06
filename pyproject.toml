@@ -5,7 +5,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "PySkel"
+name = "Obscura"
 version = "1.0"
 authors = [{ name = "David Rudlstorfer" }]
 maintainers = [{ name = "David Rudlstorfer" }]
@@ -20,7 +20,7 @@ dynamic = ["dependencies"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["pyskel"]
+include = ["obscura"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.in"] }
@@ -29,8 +29,8 @@ dependencies = { file = ["requirements.in"] }
 safe = {file = ["requirements.txt"]}
 
 [project.scripts]
-pyskel = "pyskel.main:main"
-pyskel-example = "pyskel.main:run_example"
+obscura = "obscura.main:main"
+obscura-example = "obscura.main:run_example"
 
 ## Tools
 
@@ -40,4 +40,4 @@ relative_files = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-p pytest_cov --cov-report=term --cov-report=html --cov-fail-under=90 --cov=src/pyskel"
+addopts = "-p pytest_cov --cov-report=term --cov-report=html --cov-fail-under=90 --cov=src/obscura"

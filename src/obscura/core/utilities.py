@@ -1,4 +1,4 @@
-"""Utilities for PySkel main routine."""
+"""Utilities for Obscura main routine."""
 
 import logging
 import os
@@ -9,28 +9,28 @@ import yaml
 
 from pytoda.logger import log_full_width, print_header, setup_logging
 
-log = logging.getLogger("pyskel")
+log = logging.getLogger("obscura")
 
 
 class RunManager:
-    """Helper functions to manage a PySkel run."""
+    """Helper functions to manage a Obscura run."""
 
     def __init__(self, config: Any) -> None:
         self.config = config
 
     def init_run(self) -> None:
-        """Set up PySkel run including logger."""
+        """Set up Obscura run including logger."""
 
         setup_logging(
             self.config.general.log_to_console,
             self.config.general.log_file,
             self.config.general.output_directory,
             self.config.general.sim_name,
-            "pyskel",
+            "obscura",
         )
 
         print_header(
-            title="PySkel",
+            title="Obscura",
             description="General Python Skeleton",
         )
 

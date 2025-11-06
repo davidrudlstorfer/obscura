@@ -8,22 +8,22 @@ import pytest
 import yaml
 from munch import munchify
 
-from pyskel.main import main, run_example
+from obscura.main import main, run_example
 
 
 def test_run_example_calls_main_with_config():
     """Test that run_example sets sys.argv and calls main()."""
 
     with (
-        patch("sys.argv", ["pyskel"]),
-        patch("pyskel.main.main") as mock_main,
+        patch("sys.argv", ["obscura"]),
+        patch("obscura.main.main") as mock_main,
     ):
         run_example()
 
         assert sys.argv == [
-            "pyskel",
+            "obscura",
             "--config_file_path",
-            "src/pyskel/configs/config_example.yaml",
+            "src/obscura/configs/config_example.yaml",
         ]
         mock_main.assert_called_once()
 
@@ -46,12 +46,12 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
     ):
         with patch("builtins.open", mock_open(read_data=yaml.dump(mock_config_data))):
             with patch("yaml.safe_load", return_value=mock_config_data):
-                mock_run_pyskel = MagicMock()
-                with patch("pyskel.main.run_pyskel", mock_run_pyskel):
+                mock_run_obscura = MagicMock()
+                with patch("obscura.main.run_obscura", mock_run_obscura):
                     # Run main function
                     main()
 
-    captured_config = mock_run_pyskel.call_args[0][0]
+    captured_config = mock_run_obscura.call_args[0][0]
     assert captured_config == munchify(mock_config_data)
 
 

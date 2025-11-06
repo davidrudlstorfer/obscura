@@ -1,4 +1,4 @@
-name: pyskel
+name: obscura
 channels:
   - conda-forge
 dependencies:

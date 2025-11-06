@@ -1,17 +1,17 @@
-"""Runner which executes the main routine of PySkel."""
+"""Runner which executes the main routine of Obscura."""
 
 import logging
 import time
 from typing import Any
 
-from pyskel.core.example import exemplary_function
-from pyskel.core.utilities import RunManager
+from obscura.core.example import exemplary_function
+from obscura.core.utilities import RunManager
 
-log = logging.getLogger("pyskel")
+log = logging.getLogger("obscura")
 
 
-def run_pyskel(config: Any) -> None:
-    """General run procedure of PySkel.
+def run_obscura(config: Any) -> None:
+    """General run procedure of Obscura.
 
     Args:
         config: Munch type object containing all configs for current
