@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 import yaml
 from munch import munchify
 
-from pyskel.core.utilities import RunManager
+from obscura.core.utilities import RunManager
 
 
 def test_run_manager_init_run() -> None:
@@ -17,10 +17,10 @@ def test_run_manager_init_run() -> None:
     mock_config = MagicMock()
 
     with (
-        patch("pyskel.core.utilities.setup_logging") as mock_setup_logging,
-        patch("pyskel.core.utilities.print_header") as mock_print_header,
-        patch("pyskel.core.utilities.log_full_width") as mock_log_full_width,
-        patch("pyskel.core.utilities.RunManager.write_config") as mock_write_config,
+        patch("obscura.core.utilities.setup_logging") as mock_setup_logging,
+        patch("obscura.core.utilities.print_header") as mock_print_header,
+        patch("obscura.core.utilities.log_full_width") as mock_log_full_width,
+        patch("obscura.core.utilities.RunManager.write_config") as mock_write_config,
     ):
         run_manager = RunManager(mock_config)
 
@@ -31,7 +31,7 @@ def test_run_manager_init_run() -> None:
             mock_config.general.log_file,
             mock_config.general.output_directory,
             mock_config.general.sim_name,
-            "pyskel",
+            "obscura",
         )
         mock_print_header.assert_called_once()
         mock_log_full_width.assert_called_once_with("RUN STARTED")
@@ -86,8 +86,8 @@ def test_run_manager_finish_run() -> None:
     mock_config = MagicMock()
 
     with (
-        patch("pyskel.core.utilities.log_full_width") as mock_log_full_width,
-        patch("pyskel.core.utilities.log") as mock_log,
+        patch("obscura.core.utilities.log_full_width") as mock_log_full_width,
+        patch("obscura.core.utilities.log") as mock_log,
     ):
         run_manager = RunManager(mock_config)
 

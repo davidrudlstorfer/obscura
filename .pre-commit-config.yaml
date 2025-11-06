@@ -47,7 +47,7 @@ repos:
     hooks:
       - id: docformatter
         name: Run docformatter (formatter for docstrings)
-        args: ["--in-place", "--config=./pyproject.toml", "-r", "src/pyskel/", "tests/"]
+        args: ["--in-place", "--config=./pyproject.toml", "-r", "src/obscura/", "tests/"]
   - repo: https://github.com/econchick/interrogate
     rev: 1.7.0
     hooks:
