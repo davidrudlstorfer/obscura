@@ -7,3 +7,6 @@ pre-commit
 pyfiglet
 pytest-cov
 pyyaml
+vtk
+mathutils
+bpy

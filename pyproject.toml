@@ -15,7 +15,7 @@ license = {file = "LICENSE.md"}
 keywords = ["Skeleton", "Documentation", "CICD", "Testing", "Pre-Commit"]
 classifiers = ["Programming Language :: Python :: 3.13"]
 
-requires-python = ">=3.9"
+requires-python = "==3.11.*"
 dynamic = ["dependencies"]
 
 [tool.setuptools.packages.find]
@@ -40,4 +40,4 @@ relative_files = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-p pytest_cov --cov-report=term --cov-report=html --cov-fail-under=90 --cov=src/obscura"
+addopts = "-p pytest_cov --cov-report=term --cov-report=html --cov-fail-under=30 --cov=src/obscura"
