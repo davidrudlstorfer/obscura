@@ -12,7 +12,7 @@
 | src/obscura/core/run.py                   |       12 |        0 |    100% |           |
 | src/obscura/core/utilities.py             |       33 |        2 |     94% |     92-93 |
 | src/obscura/main.py                       |       18 |        0 |    100% |           |
-|                                 **TOTAL** |  **172** |  **109** | **37%** |           |
+| **TOTAL**                                 |  **172** |  **109** | **37%** |           |
 
 
 ## Setup coverage badge
