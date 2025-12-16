@@ -8,5 +8,4 @@ pyfiglet
 pytest-cov
 pyyaml
 vtk
-mathutils
 bpy
