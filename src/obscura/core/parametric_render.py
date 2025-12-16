@@ -77,20 +77,28 @@ if __name__ == "__main__":
         """Set up three-point lighting using SUN lights."""
 
         # Key light
-        bpy.ops.object.light_add(type="SUN", location=(center + np.array([max_dim, -max_dim, max_dim])).tolist())
+        bpy.ops.object.light_add(
+            type="SUN",
+            location=(center + np.array([max_dim, -max_dim, max_dim])).tolist(),
+        )
         key_light = bpy.context.active_object
         key_light.data.energy = params.get("key_light_intensity", 2.5)
         key_light.rotation_euler = (math.radians(-60), 0, math.radians(45))
 
         # Fill light
-        bpy.ops.object.light_add(type="SUN", location=(center + np.array([-max_dim, max_dim, max_dim])).tolist())
+        bpy.ops.object.light_add(
+            type="SUN",
+            location=(center + np.array([-max_dim, max_dim, max_dim])).tolist(),
+        )
 
         fill_light = bpy.context.active_object
         fill_light.data.energy = params.get("fill_light_intensity", 1.5)
         fill_light.rotation_euler = (math.radians(-60), 0, math.radians(-45))
 
         # Back light
-        bpy.ops.object.light_add(type="SUN", location= (center + np.array([0, 0, max_dim * 1.5])).tolist())
+        bpy.ops.object.light_add(
+            type="SUN", location=(center + np.array([0, 0, max_dim * 1.5])).tolist()
+        )
         back_light = bpy.context.active_object
         back_light.data.energy = params.get("fill_light_intensity", 1.5) * 0.5
         back_light.rotation_euler = (math.radians(-30), 0, math.radians(180))
