@@ -48,21 +48,19 @@ if __name__ == "__main__":
     mesh_obj.rotation_euler = [math.radians(a) for a in obj_rot_deg]
 
     # --- Compute bounding box and center ---
-    bbox = np.array(mesh_obj.bound_box)
-    min_corner = bbox.min(axis=0)
-    max_corner = bbox.max(axis=0)
-    center = (min_corner + max_corner) / 2
-    dims = max_corner - min_corner
-    max_dim = max(dims)
+    bbox = np.asarray(mesh_obj.bound_box)
+    center = bbox.mean(axis=0)
+    max_extent = bbox.ptp(axis=0).max()
 
     # --- Automatic camera setup ---
-    cam_location = center + np.array([0, -max_dim * 2, max_dim])
-    bpy.ops.object.camera_add(location=cam_location.tolist())
+    bpy.ops.object.camera_add(
+        location=(center + [0, -2 * max_extent, max_extent]).tolist()
+    )
 
     cam_obj = bpy.context.active_object
     cam_obj.data.lens = params.get("camera_lens", 35)
     cam_obj.data.type = params.get("camera_type", "PERSP")
-    cam_obj.data.clip_end = max_dim * 10  # Ensure large/slender objects are visible
+    cam_obj.data.clip_end = max_extent * 10  # Ensure large/slender objects are visible
 
     # Track camera to object
     track = cam_obj.constraints.new("TRACK_TO")
@@ -73,13 +71,13 @@ if __name__ == "__main__":
 
     # --- Automatic lighting setup (simple SUNs) ---
 
-    def setup_lighting(center: np.ndarray, max_dim: float, params: dict) -> tuple:
+    def setup_lighting(center: np.ndarray, max_extent: float, params: dict) -> tuple:
         """Set up three-point lighting using SUN lights."""
 
         # Key light
         bpy.ops.object.light_add(
             type="SUN",
-            location=(center + np.array([max_dim, -max_dim, max_dim])).tolist(),
+            location=(center + [max_extent, -max_extent, max_extent]).tolist(),
         )
         key_light = bpy.context.active_object
         key_light.data.energy = params.get("key_light_intensity", 2.5)
@@ -88,7 +86,7 @@ if __name__ == "__main__":
         # Fill light
         bpy.ops.object.light_add(
             type="SUN",
-            location=(center + np.array([-max_dim, max_dim, max_dim])).tolist(),
+            location=(center + [-max_extent, max_extent, max_extent]).tolist(),
         )
 
         fill_light = bpy.context.active_object
@@ -97,7 +95,7 @@ if __name__ == "__main__":
 
         # Back light
         bpy.ops.object.light_add(
-            type="SUN", location=(center + np.array([0, 0, max_dim * 1.5])).tolist()
+            type="SUN", location=(center + [0, 0, 1.5 * max_extent]).tolist()
         )
         back_light = bpy.context.active_object
         back_light.data.energy = params.get("fill_light_intensity", 1.5) * 0.5
@@ -105,7 +103,7 @@ if __name__ == "__main__":
 
         return key_light, fill_light, back_light
 
-    key_light, fill_light, back_light = setup_lighting(center, max_dim, params)
+    key_light, fill_light, back_light = setup_lighting(center, max_extent, params)
 
     # --- Material ---
     mat = bpy.data.materials.new(name="MeshMaterial")
