@@ -5,7 +5,7 @@ import time
 from typing import Any
 
 # from obscura.core.example import exemplary_function
-from obscura.core.render import render
+from obscura.core.rendering.render import render
 from obscura.core.utilities import RunManager
 
 log = logging.getLogger("obscura")
