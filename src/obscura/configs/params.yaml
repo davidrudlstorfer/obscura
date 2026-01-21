@@ -1,3 +1,9 @@
+general:
+  output_directory: output
+  sim_name: test_sim
+  log_file: obscura.log
+  log_to_console: true
+
 paths:
   input_file: "/workspace/inputfiles/sample.stl"
   output_file: "/workspace/output/render_sample.png"
@@ -48,6 +54,7 @@ render:
   samples: 128
 
 preview:
+  preview_mode: true
   preview_resolution_x: 640
   preview_resolution_y: 460
   preview_engine: CYCLES

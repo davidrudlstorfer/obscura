@@ -4,7 +4,8 @@ import logging
 import time
 from typing import Any
 
-from obscura.core.example import exemplary_function
+# from obscura.core.example import exemplary_function
+from obscura.core.render import render
 from obscura.core.utilities import RunManager
 
 log = logging.getLogger("obscura")
@@ -26,7 +27,8 @@ def run_obscura(config: Any) -> None:
     run_manager.init_run()
 
     # add overall execution here
-    log.info("Output of exemplary program: " + str(exemplary_function(2, 4)))
+    # log.info("Output of exemplary program: " + str(exemplary_function(2, 4)))
+    render(config)
 
     # finalize run
     run_manager.finish_run(start_time)
