@@ -1,20 +1,21 @@
-"""Object loading and transformation utilities for Blender."""
+"""Object loading, applying transforms, and computing object geometry in
+Blender."""
 
 import math
+from typing import Any
 
 import bpy
 import numpy as np
-from munch import DefaultMunch
 
 
-def load_mesh(config: DefaultMunch) -> bpy.types.Object:
+def load_mesh(config: Any) -> bpy.types.Object:
     """Import the STL mesh and return the Blender object."""
     stl_path = config.paths.input_file
     bpy.ops.wm.stl_import(filepath=stl_path)
     return bpy.context.selected_objects[0]
 
 
-def apply_transforms(mesh_obj: bpy.types.Object, config: DefaultMunch) -> None:
+def apply_transforms(mesh_obj: bpy.types.Object, config: Any) -> None:
     """Apply basic transforms from params (scale, location, and rotation)"""
     mesh_obj.scale = config.object_settings.get("mesh_scale", [1, 1, 1])
     mesh_obj.location = config.object_settings.get("mesh_location", [0, 0, 0])

@@ -1,10 +1,11 @@
-"""Rendering background for Blender."""
+"""Set-up background in Blender."""
+
+from typing import Any
 
 import bpy
-from munch import DefaultMunch
 
 
-def define_background(config: DefaultMunch) -> None:
+def define_background(config: Any) -> None:
     """Configure the world background color for the scene."""
     if bpy.context.scene.world is None:
         bpy.context.scene.world = bpy.data.worlds.new("World")

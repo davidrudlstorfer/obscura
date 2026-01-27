@@ -20,28 +20,21 @@ def main() -> None:
         RuntimeError: If provided config is not a valid file.
     """
     argv = sys.argv
-    if "--" in argv:  # If called with Docker/Blender
+    if "--" in argv:
         argv = argv[argv.index("--") + 1 :]
     else:
-        argv = []  # If called with "obscura"
+        argv = []
 
-    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser = argparse.ArgumentParser(description="Execute Obscura")
     parser.add_argument(
         "--config_file_path",
         "-cfp",
         help="Path to config file.",
         type=str,
-        required=False,
+        required=True,
     )
 
     args = parser.parse_args(argv)
-
-    # If no argument was provided: use default config
-    if args.config_file_path is None:
-        print("No config file provided, using default config.")
-        args.config_file_path = "src/obscura/configs/params.yaml"
-    else:
-        print("Obscura executed from given config file")
 
     # load config and convert to simple namespace for easier access
     if not os.path.isfile(args.config_file_path):

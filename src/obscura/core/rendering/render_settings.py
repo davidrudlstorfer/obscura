@@ -1,12 +1,12 @@
-"""Rendering settings utilities for Blender."""
+"""Rendering settings and final image generation in Blender."""
 
 import os
+from typing import Any
 
 import bpy
-from munch import DefaultMunch
 
 
-def configure_render(scene: bpy.types.Scene, config: DefaultMunch) -> None:
+def render(scene: bpy.types.Scene, config: Any) -> None:
     """Configure preview or full render settings."""
     output_path = config.paths.output_file
     scene.render.image_settings.file_format = "PNG"
@@ -32,5 +32,5 @@ def configure_render(scene: bpy.types.Scene, config: DefaultMunch) -> None:
         scene.render.engine = config.render.get("render_engine", "CYCLES")
         scene.cycles.samples = config.render.get("samples", 64)
 
-    # --- Render ---
+    # Render
     bpy.ops.render.render(write_still=True)

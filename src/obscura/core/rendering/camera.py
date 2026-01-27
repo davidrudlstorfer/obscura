@@ -1,16 +1,17 @@
 """Camera utilities for Blender."""
 
+from typing import Any
+
 import bpy
 import numpy as np
-from munch import DefaultMunch
 
 
 def setup_camera(
-    config: DefaultMunch,
+    config: Any,
     mesh_obj: bpy.types.Object,
     center: np.ndarray,
     max_extent: float,
-) -> bpy.types.Object:
+) -> None:
     """Create and configure camera settings."""
 
     bpy.ops.object.camera_add(  # Automatic camera setup
@@ -28,5 +29,3 @@ def setup_camera(
     track.track_axis = "TRACK_NEGATIVE_Z"
     track.up_axis = "UP_Y"
     bpy.context.scene.camera = cam_obj
-
-    return cam_obj

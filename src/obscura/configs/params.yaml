@@ -21,7 +21,7 @@ object_settings:
   rotation: #degrees to be converted into rad in the parametric_render file
     - 0
     - 0
-    - 15
+    - 0
 
 material:
   material_color:
@@ -42,9 +42,9 @@ light:
   ambient_light_strength: 0.2
 
 background_color:
-  - 0.95
-  - 0.95
-  - 0.95
+  - 1
+  - 1
+  - 1
   - 1
 
 render:
@@ -55,10 +55,10 @@ render:
 
 preview:
   preview_mode: true
-  preview_resolution_x: 640
-  preview_resolution_y: 460
+  preview_resolution_x: 960
+  preview_resolution_y: 600
   preview_engine: CYCLES
-  preview_samples: 8
+  preview_samples: 32
   preview_use_denoising: true
   preview_use_ao: true
   preview_use_bloom: false

@@ -1,15 +1,13 @@
 """Lighting utilities for Blender."""
 
 import math
+from typing import Any
 
 import bpy
 import numpy as np
-from munch import DefaultMunch
 
 
-def setup_lighting(
-    center: np.ndarray, max_extent: float, config: DefaultMunch
-) -> tuple:
+def setup_lighting(center: np.ndarray, max_extent: float, config: Any) -> None:
     """Set up three-point lighting using SUN lights."""
 
     # Key light
@@ -39,10 +37,8 @@ def setup_lighting(
     back_light.data.energy = config.light.get("fill_light_intensity", 1.5) * 0.5
     back_light.rotation_euler = (math.radians(-30), 0, math.radians(180))
 
-    return key_light, fill_light, back_light
 
-
-def ambient_lighting(config: DefaultMunch) -> None:
+def ambient_lighting(config: Any) -> None:
     """Configure ambient world lighting."""
     if bpy.context.scene.world is None:
         bpy.context.scene.world = bpy.data.worlds.new("World")

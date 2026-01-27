@@ -1,10 +1,11 @@
 """Material utilities for Blender."""
 
+from typing import Any
+
 import bpy
-from munch import DefaultMunch
 
 
-def apply_material(mesh_obj: bpy.types.Object, config: DefaultMunch) -> None:
+def apply_material(mesh_obj: bpy.types.Object, config: Any) -> None:
     """Create and apply a material to the mesh."""
     mat = bpy.data.materials.new(name="MeshMaterial")
     mat.use_nodes = True
