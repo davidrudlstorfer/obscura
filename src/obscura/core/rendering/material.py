@@ -11,14 +11,8 @@ def apply_material(mesh_obj: bpy.types.Object, config: Any) -> None:
     mat.use_nodes = True
     bsdf = mat.node_tree.nodes.get("Principled BSDF")
     if bsdf:
-        bsdf.inputs["Base Color"].default_value = config.material.get(
-            "material_color", [0.8, 0.2, 0.2, 1]
-        )
-        bsdf.inputs["Roughness"].default_value = config.material.get(
-            "material_roughness", 0.5
-        )
-        bsdf.inputs["Metallic"].default_value = config.material.get(
-            "material_metallic", 0.0
-        )
+        bsdf.inputs["Base Color"].default_value = config.material.material_color
+        bsdf.inputs["Roughness"].default_value = config.material.material_roughness
+        bsdf.inputs["Metallic"].default_value = config.material.material_metallic
 
     mesh_obj.data.materials.append(mat)

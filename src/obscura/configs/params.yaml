@@ -50,16 +50,13 @@ background_color:
 render:
   render_resolution_x: 1920
   render_resolution_y: 1200
-  render_engine: CYCLES
-  samples: 128
+  render_engine: CYCLES # 'BLENDER_EEVEE_NEXT', 'CYCLES'
+  samples: 128 # For CYCLES
 
 preview:
-  preview_mode: true
+  preview_mode: false
   preview_resolution_x: 960
   preview_resolution_y: 600
-  preview_engine: CYCLES
-  preview_samples: 32
-  preview_use_denoising: true
-  preview_use_ao: true
-  preview_use_bloom: false
-  preview_use_reflections: false
+  preview_engine: CYCLES # 'BLENDER_EEVEE_NEXT', 'CYCLES'
+  preview_samples: 32 # For CYCLES
+  preview_use_denoising: true # For CYCLES

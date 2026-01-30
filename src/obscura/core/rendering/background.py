@@ -12,6 +12,4 @@ def define_background(config: Any) -> None:
     bpy.context.scene.world.use_nodes = True
     bg_node = bpy.context.scene.world.node_tree.nodes.get("Background")
     if bg_node:
-        bg_node.inputs["Color"].default_value = config.get(
-            "background_color", [1, 1, 1, 1]
-        )
+        bg_node.inputs["Color"].default_value = config.background_color

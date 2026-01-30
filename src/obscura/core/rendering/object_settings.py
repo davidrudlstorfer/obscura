@@ -17,15 +17,15 @@ def load_mesh(config: Any) -> bpy.types.Object:
 
 def apply_transforms(mesh_obj: bpy.types.Object, config: Any) -> None:
     """Apply basic transforms from params (scale, location, and rotation)"""
-    mesh_obj.scale = config.object_settings.get("mesh_scale", [1, 1, 1])
-    mesh_obj.location = config.object_settings.get("mesh_location", [0, 0, 0])
+    mesh_obj.scale = config.object_settings.mesh_scale
+    mesh_obj.location = config.object_settings.mesh_location
 
     bpy.ops.object.origin_set(
         type="ORIGIN_CENTER_OF_MASS", center="BOUNDS"
     )  # Center origin
 
-    obj_rot_deg = config.object_settings.get(
-        "rotation", [0, 0, 0]
+    obj_rot_deg = (
+        config.object_settings.rotation
     )  # Apply user-defined 3-axis rotation (in degrees)
     mesh_obj.rotation_euler = [math.radians(a) for a in obj_rot_deg]
 

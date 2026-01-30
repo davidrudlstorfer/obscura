@@ -19,8 +19,8 @@ def setup_camera(
     )
 
     cam_obj = bpy.context.active_object
-    cam_obj.data.lens = config.camera.get("camera_lens", 35)
-    cam_obj.data.type = config.camera.get("camera_type", "PERSP")
+    cam_obj.data.lens = config.camera.camera_lens
+    cam_obj.data.type = config.camera.camera_type
     cam_obj.data.clip_end = max_extent * 10  # Ensure large/slender objects are visible
 
     # Track camera to object
