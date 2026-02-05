@@ -33,13 +33,12 @@ def main() -> None:
         type=str,
         required=True,
     )
-
     args = parser.parse_args(argv)
 
-    # load config and convert to simple namespace for easier access
     if not os.path.isfile(args.config_file_path):
-        raise RuntimeError(f"Config file not found at {args.config_file_path}")
+        raise RuntimeError("Config file not found! Obscura can not be executed!")
 
+    # load config and convert to simple namespace for easier access
     with open(args.config_file_path, "r") as file:
         config = munchify(yaml.safe_load(file))
 
