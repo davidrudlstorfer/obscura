@@ -30,7 +30,6 @@ safe = {file = ["requirements.txt"]}
 
 [project.scripts]
 obscura = "obscura.main:main"
-obscura-example = "obscura.main:run_example"
 
 ## Tools
 

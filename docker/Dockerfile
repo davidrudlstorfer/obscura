@@ -44,7 +44,7 @@ ENV PATH="/opt/blender:$PATH"
 # Install PyYAML inside Blender's bundled Python, otherwise it can't import yaml and read in the params.yaml file
 RUN BLENDER_PYTHON=$(find /opt/blender -type f -path "*/bin/python3.*" | head -n 1) && \
     $BLENDER_PYTHON -m ensurepip && \
-    $BLENDER_PYTHON -m pip install --no-cache-dir pyyaml
+    $BLENDER_PYTHON -m pip install --no-cache-dir pyyaml munch pyfiglet
 
 # --- Install Python packages ---
 RUN pip3 install --no-cache-dir vtk
