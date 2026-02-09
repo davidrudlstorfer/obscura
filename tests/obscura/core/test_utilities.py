@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+import pytest
 import yaml
 from munch import munchify
 
@@ -33,7 +34,10 @@ def test_run_manager_init_run() -> None:
             mock_config.general.sim_name,
             "obscura",
         )
-        mock_print_header.assert_called_once()
+        mock_print_header.assert_called_once_with(
+            title="Obscura",
+            description="General Python Skeleton",
+        )
         mock_log_full_width.assert_called_once_with("RUN STARTED")
         mock_write_config.assert_called_once()
 
@@ -48,7 +52,7 @@ def test_write_config(tmp_path: Path) -> None:
     mock_config = munchify(
         {
             "general": {
-                "output_directory": f"{tmp_path}",
+                "output_directory": str(tmp_path),
                 "sim_name": "sim_name",
             }
         }
@@ -71,13 +75,10 @@ def test_write_config(tmp_path: Path) -> None:
         }
     )
     run_manager = RunManager(mock_config)
-
-    try:
+    with pytest.raises(
+        ValueError, match="Output directory and sim name must be provided for output!"
+    ):
         run_manager.write_config()
-    except ValueError as error:
-        assert str(error) == (
-            "Output directory and sim name must be provided for output!"
-        )
 
 
 def test_run_manager_finish_run() -> None:
