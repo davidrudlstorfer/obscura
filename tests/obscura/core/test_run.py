@@ -14,11 +14,18 @@ def test_run_obscura() -> None:
 
     mock_run_manager = MagicMock()
 
-    with patch("obscura.core.run.RunManager", return_value=mock_run_manager):
-        mock_exemplary_function = MagicMock(return_value="Exemplary output")
-        with patch("obscura.core.run.exemplary_function", mock_exemplary_function):
-            run_obscura(mock_config)
+    # patch RunManager and rendering_pipeline
+    with (
+        patch("obscura.core.run.RunManager", return_value=mock_run_manager),
+        patch("obscura.core.run.rendering_pipeline") as mock_pipeline,
+    ):
+        run_obscura(mock_config)
 
-    mock_run_manager.init_run.assert_called_once()
-    mock_exemplary_function.assert_called_once()
-    mock_run_manager.finish_run.assert_called_once()
+        # check RunManager methods called
+        mock_run_manager.init_run.assert_called_once()
+        mock_run_manager.finish_run.assert_called_once()
+        args, _ = mock_run_manager.finish_run.call_args
+        assert isinstance(args[0], float)
+
+        # check rendering pipeline called correctly
+        mock_pipeline.assert_called_once_with(mock_config)
