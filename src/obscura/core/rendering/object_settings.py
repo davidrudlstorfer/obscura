@@ -10,7 +10,7 @@ import numpy as np
 
 def load_mesh(config: Any) -> bpy.types.Object:
     """Import the STL mesh and return the Blender object."""
-    stl_path = config.paths.input_file
+    stl_path = config.general.input_file_path
     bpy.ops.wm.stl_import(filepath=stl_path)
     return bpy.context.selected_objects[0]
 
