@@ -1,7 +1,6 @@
 """Object loading, applying transforms, and computing object geometry in
 Blender."""
 
-import math
 from typing import Any
 
 import bpy
@@ -24,10 +23,7 @@ def apply_transforms(mesh_obj: bpy.types.Object, config: Any) -> None:
         type="ORIGIN_CENTER_OF_MASS", center="BOUNDS"
     )  # Center origin
 
-    obj_rot_deg = (
-        config.object_settings.rotation
-    )  # Apply user-defined 3-axis rotation (in degrees)
-    mesh_obj.rotation_euler = [math.radians(a) for a in obj_rot_deg]
+    mesh_obj.rotation_euler = tuple(np.deg2rad(config.object_settings.rotation))
 
 
 def compute_geometry(mesh_obj: bpy.types.Object) -> tuple[np.ndarray, float]:

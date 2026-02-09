@@ -1,6 +1,5 @@
 """Lighting utilities for Blender."""
 
-import math
 from typing import Any
 
 import bpy
@@ -17,7 +16,7 @@ def setup_lighting(center: np.ndarray, max_extent: float, config: Any) -> None:
     )
     key_light = bpy.context.active_object
     key_light.data.energy = config.light.key_light_intensity
-    key_light.rotation_euler = (math.radians(-60), 0, math.radians(45))
+    key_light.rotation_euler = tuple(np.deg2rad([-60, 0, 45]))
 
     # Fill light
     bpy.ops.object.light_add(
@@ -27,8 +26,7 @@ def setup_lighting(center: np.ndarray, max_extent: float, config: Any) -> None:
 
     fill_light = bpy.context.active_object
     fill_light.data.energy = config.light.fill_light_intensity
-    fill_light.rotation_euler = (math.radians(-60), 0, math.radians(-45))
-
+    fill_light.rotation_euler = tuple(np.deg2rad([-60, 0, -45]))
     # Back light
     bpy.ops.object.light_add(
         type="SUN", location=(center + [0, 0, 1.5 * max_extent]).tolist()
@@ -37,7 +35,7 @@ def setup_lighting(center: np.ndarray, max_extent: float, config: Any) -> None:
     back_light.data.energy = (
         config.light.fill_light_intensity * 0.5
     )  # intentionally set weaker than the fill light (classic 3‑point lighting ratio)
-    back_light.rotation_euler = (math.radians(-30), 0, math.radians(180))
+    back_light.rotation_euler = tuple(np.deg2rad([-30, 0, 180]))
 
 
 def ambient_lighting(config: Any) -> None:
