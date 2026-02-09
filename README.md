@@ -2,17 +2,23 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/davidrudlstorfer/obscura/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                                      |    Stmts |     Miss |   Cover |   Missing |
-|------------------------------------------ | -------: | -------: | ------: | --------: |
-| src/obscura/\_\_init\_\_.py               |        0 |        0 |    100% |           |
-| src/obscura/core/\_\_init\_\_.py          |        0 |        0 |    100% |           |
-| src/obscura/core/convert\_vtu\_to\_stl.py |       15 |       15 |      0% |      3-26 |
-| src/obscura/core/example.py               |        2 |        0 |    100% |           |
-| src/obscura/core/parametric\_render.py    |       88 |       88 |      0% |     3-163 |
-| src/obscura/core/run.py                   |       12 |        0 |    100% |           |
-| src/obscura/core/utilities.py             |       33 |        2 |     94% |     92-93 |
-| src/obscura/main.py                       |       18 |        0 |    100% |           |
-| **TOTAL**                                 |  **168** |  **105** | **38%** |           |
+| Name                                              |    Stmts |     Miss |   Cover |   Missing |
+|-------------------------------------------------- | -------: | -------: | ------: | --------: |
+| src/obscura/\_\_init\_\_.py                       |        0 |        0 |    100% |           |
+| src/obscura/core/\_\_init\_\_.py                  |        0 |        0 |    100% |           |
+| src/obscura/core/convert\_vtu\_to\_stl.py         |       15 |       15 |      0% |      3-26 |
+| src/obscura/core/rendering/\_\_init\_\_.py        |        0 |        0 |    100% |           |
+| src/obscura/core/rendering/background.py          |        9 |        6 |     33% |     10-15 |
+| src/obscura/core/rendering/camera.py              |       14 |       10 |     29% |     17-31 |
+| src/obscura/core/rendering/lighting.py            |       24 |       18 |     25% |14-40, 45-51 |
+| src/obscura/core/rendering/material.py            |       11 |        8 |     27% |     10-18 |
+| src/obscura/core/rendering/object\_settings.py    |       19 |       12 |     37% |13-15, 20-30, 35-38 |
+| src/obscura/core/rendering/render\_settings.py    |       24 |       20 |     17% |     11-37 |
+| src/obscura/core/rendering/rendering\_pipeline.py |       23 |        0 |    100% |           |
+| src/obscura/core/run.py                           |       12 |        0 |    100% |           |
+| src/obscura/core/utilities.py                     |       33 |        2 |     94% |     92-93 |
+| src/obscura/main.py                               |       21 |        1 |     95% |        24 |
+| **TOTAL**                                         |  **205** |   **92** | **55%** |           |
 
 
 ## Setup coverage badge
