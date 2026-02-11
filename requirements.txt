@@ -65,7 +65,7 @@ packaging==26.0
     #   pytest
 pdoc==16.0.0
     # via -r requirements.in
-pillow==12.1.0
+pillow==12.1.1
     # via matplotlib
 platformdirs==4.5.1
     # via virtualenv
