@@ -65,7 +65,7 @@ packaging==26.0
     #   pytest
 pdoc==16.0.0
     # via -r requirements.in
-pillow==12.1.0
+pillow==12.1.1
     # via matplotlib
 platformdirs==4.5.1
     # via virtualenv
@@ -101,7 +101,7 @@ urllib3==2.6.3
     # via requests
 virtualenv==20.36.1
     # via pre-commit
-vtk==9.5.2
+vtk==9.6.0
     # via -r requirements.in
 zstandard==0.25.0
     # via bpy
