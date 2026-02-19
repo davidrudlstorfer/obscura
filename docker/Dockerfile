@@ -1,7 +1,13 @@
-# --- Base image ---
+# Base image
 FROM ubuntu:22.04
 
-# --- Install system dependencies ---
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Force software OpenGL rendering
+ENV LIBGL_ALWAYS_SOFTWARE=1
+ENV MESA_GL_VERSION_OVERRIDE=4.5
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
@@ -26,11 +32,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# --- Force software OpenGL rendering ---
-ENV LIBGL_ALWAYS_SOFTWARE=1
-ENV MESA_GL_VERSION_OVERRIDE=4.5
-
-# --- Blender installation (4.4.3) ---
+# Blender installation
+WORKDIR /opt
 ARG BLENDER_VERSION=4.4.3
 ARG BLENDER_MAJOR=4.4
 RUN wget https://ftp.halifax.rwth-aachen.de/blender/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz && \
@@ -38,21 +41,30 @@ RUN wget https://ftp.halifax.rwth-aachen.de/blender/release/Blender${BLENDER_MAJ
     tar -xvf blender-${BLENDER_VERSION}-linux-x64.tar.xz --strip-components=1 -C /opt/blender && \
     rm blender-${BLENDER_VERSION}-linux-x64.tar.xz
 
+ENV BLENDER_DIR=/opt/blender
+
 # Add Blender to PATH
 ENV PATH="/opt/blender:$PATH"
 
-# Install PyYAML inside Blender's bundled Python, otherwise it can't import yaml and read in the params.yaml file
-RUN BLENDER_PYTHON=$(find /opt/blender -type f -path "*/bin/python3.*" | head -n 1) && \
+# Install pip inside Blender Python
+RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" | head -n 1) && \
     $BLENDER_PYTHON -m ensurepip && \
-    $BLENDER_PYTHON -m pip install --no-cache-dir pyyaml munch pyfiglet
+    $BLENDER_PYTHON -m pip install --upgrade pip --no-cache-dir
 
-# --- Install Python packages ---
-RUN pip3 install --no-cache-dir vtk
+# Copy project
+WORKDIR /workspace
+COPY . .
 
-# --- Optional: make python available globally ---
-RUN ln -s /usr/bin/python3 /usr/bin/python
+# Install Pytoda into Blender Python (needed since Pytoda is an independent Package, not directly accessible in src)
+RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" | head -n 1) && \
+    $BLENDER_PYTHON -m pip install ./src/pytoda --no-cache-dir
 
-# --- Check versions ---
-RUN blender --version
-RUN python --version
-RUN pip --version
+# Install project into Blender Python (thanks to pyproject.toml file)
+RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" | head -n 1) && \
+    $BLENDER_PYTHON -m pip install .
+
+# Add entrypoint
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
