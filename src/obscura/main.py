@@ -2,10 +2,6 @@
 
 import argparse
 import os
-import sys
-
-sys.path.append("/workspace/src")
-sys.path.append("/workspace/src/pytoda/src")  # Otherwise, can't use Pytoda properly
 
 import yaml
 from munch import munchify
@@ -19,11 +15,6 @@ def main() -> None:
     Raises:
         RuntimeError: If provided config is not a valid file.
     """
-    argv = sys.argv
-    if "--" in argv:
-        argv = argv[argv.index("--") + 1 :]
-    else:
-        argv = []
 
     parser = argparse.ArgumentParser(description="Execute Obscura")
     parser.add_argument(
@@ -33,7 +24,7 @@ def main() -> None:
         type=str,
         required=True,
     )
-    args = parser.parse_args(argv)
+    args = parser.parse_args()
 
     if not os.path.isfile(args.config_file_path):
         raise RuntimeError("Config file not found! Obscura can not be executed!")
