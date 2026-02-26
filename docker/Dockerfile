@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     xz-utils \
+    git \
     libxcb1 \
     libxext6 \
     libx11-6 \
@@ -52,16 +53,17 @@ RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" 
     $BLENDER_PYTHON -m pip install --upgrade pip --no-cache-dir
 
 # Copy project
-WORKDIR /workspace
+WORKDIR /app
 COPY . .
 
-# Install Pytoda into Blender Python (needed since Pytoda is an independent Package, not directly accessible in src)
+# Install submodules (including Pytoda)
+RUN git submodule update --init --recursive
 RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" | head -n 1) && \
-    $BLENDER_PYTHON -m pip install ./src/pytoda --no-cache-dir
+    git submodule --quiet foreach --recursive $BLENDER_PYTHON -m pip install . --no-cache-dir
 
-# Install project into Blender Python (thanks to pyproject.toml file)
+# Install Obscura itself (thanks to pyproject.toml file)
 RUN BLENDER_PYTHON=$(find "$BLENDER_DIR" -type f -path "*/python/bin/python3.*" | head -n 1) && \
-    $BLENDER_PYTHON -m pip install .
+    $BLENDER_PYTHON -m pip install . --no-cache-dir
 
 # Add entrypoint
 COPY docker/entrypoint.sh /entrypoint.sh
