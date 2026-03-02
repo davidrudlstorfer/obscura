@@ -17,8 +17,8 @@
 | src/obscura/core/rendering/rendering\_pipeline.py |       23 |        0 |    100% |           |
 | src/obscura/core/run.py                           |       12 |        0 |    100% |           |
 | src/obscura/core/utilities.py                     |       33 |        2 |     94% |     92-93 |
-| src/obscura/main.py                               |       21 |        1 |     95% |        24 |
-| **TOTAL**                                         |  **202** |   **91** | **55%** |           |
+| src/obscura/main.py                               |       14 |        0 |    100% |           |
+| **TOTAL**                                         |  **195** |   **90** | **54%** |           |
 
 
 ## Setup coverage badge
