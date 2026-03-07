@@ -20,7 +20,7 @@ dynamic = ["dependencies"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["obscura"]
+include = ["obscura*"]
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.in"] }
