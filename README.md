@@ -27,7 +27,8 @@ The remaining parts of the readme are structured as follows:
 
 ## Setup
 
-TBD
+To setup and execute obscura follow the following steps:
+
 
 ## Installation
 
