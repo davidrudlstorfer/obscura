@@ -28,8 +28,8 @@ The remaining parts of the readme are structured as follows:
 ## Setup
 To setup and execute obscura follow the following steps:
 1. **Prerequisite Installation:**
-- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
-- Install [Git](https://git-scm.com/install/)  
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Install [Git](https://git-scm.com/install/)
 
 2. **Project cloning:**
 - Open a terminal (e.g. cmd, VS Code) and clone the repository in desired folder. This folder will be called folder X from now on.
