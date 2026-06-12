@@ -51,10 +51,10 @@ docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 - configure the params.yaml file located in X/render/configs as desired
 - Updated the input and output filepaths in the params.yaml file:
 ```
-  input_file_path: "/workspace/runtime/input/sampl.stl"
+  input_file_path: "/workspace/runtime/input/sample.stl"
   output_file_path: "/workspace/runtime/output/render_sample.png"
 ```
-- Change sampl.stl and render_sample.png related to your own Setup
+- Change sample.stl and render_sample.png related to your own Setup
 - In terminal of obscura run:
 ```
 docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
