@@ -26,31 +26,30 @@ The remaining parts of the readme are structured as follows:
 
 
 ## Setup
-
 To setup and execute obscura follow the following steps:
-1. Prerequisite Installation:
-- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)  ✓
-- Install [Git](https://git-scm.com/install/)  ✓
+1. **Prerequisite Installation:**
+- Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
+- Install [Git](https://git-scm.com/install/)  
 
-2. Project cloning:
+2. **Project cloning:**
 - Open a terminal (e.g. cmd, VS Code) and clone the repository in desired folder. This folder will be called folder X from now on.
 ```
 git clone https://github.com/davidrudlstorfer/obscura.git
 ```
-3. Prepare input files and configuration:
+3. **Prepare input files and configuration:**
 ```
 mkdir ./render/input
 cp ./obscura/src/obscura/configs ./render/configs
 ```
-4. Docker image building (Docker Desktop must be running):
+4. **Docker image building (Docker Desktop must be running):**
 - Open the entrypoint.sh file and make sure the line endings are set to LF and not CRLF (in VSCode bottom right of editor).
 - Save the file and run following Code:
 ```
 docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 ```
-5. Run the Blender rendering using the Docker Container on a mounted volume:
+5. **Run the Blender rendering using the Docker Container on a mounted volume:**
 - configurate the params.yaml file located in X/render/configs as desired
-- indicate the correct input and output filepaths by updating the params.yaml file:
+- Updated the input and output filepaths in the params.yaml file:
 ```
   input_file_path: "/workspace/runtime/input/sampl.stl"
   output_file_path: "/workspace/runtime/output/render_sample.png"
@@ -61,7 +60,8 @@ docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
 ```
 - Replace <PROJECT_PATH> with the path to your local repository, folder X
-6. Check if rendering was succesful by checking for an output file located in X/render/output/render_sample.png
+6. **Verify the output:**
+- Check that rendering was successful by confirming an output file exists at `X/render/output/render_sample.png`.
 
 ## Installation
 
