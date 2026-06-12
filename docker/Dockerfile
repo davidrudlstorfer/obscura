@@ -35,9 +35,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Blender installation
 WORKDIR /opt
-ARG BLENDER_VERSION=4.4.3
-ARG BLENDER_MAJOR=4.4
-RUN wget https://ftp.halifax.rwth-aachen.de/blender/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz && \
+ARG BLENDER_VERSION=5.1.0
+ARG BLENDER_MAJOR=5.1
+RUN wget https://mirror.clarkson.edu/blender/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-x64.tar.xz && \
     mkdir -p /opt/blender && \
     tar -xvf blender-${BLENDER_VERSION}-linux-x64.tar.xz --strip-components=1 -C /opt/blender && \
     rm blender-${BLENDER_VERSION}-linux-x64.tar.xz

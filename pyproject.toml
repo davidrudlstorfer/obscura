@@ -15,7 +15,7 @@ license = {file = "LICENSE.md"}
 keywords = ["Skeleton", "Documentation", "CICD", "Testing", "Pre-Commit"]
 classifiers = ["Programming Language :: Python :: 3.13"]
 
-requires-python = "==3.11.*"
+requires-python = ">=3.11"
 dynamic = ["dependencies"]
 
 [tool.setuptools.packages.find]
