@@ -48,7 +48,7 @@ cp -r ./obscura/src/obscura/configs ./render/configs
 docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 ```
 5. **Run the Blender rendering using the Docker Container on a mounted volume:**
-- configurate the params.yaml file located in X/render/configs as desired
+- configure the params.yaml file located in X/render/configs as desired
 - Updated the input and output filepaths in the params.yaml file:
 ```
   input_file_path: "/workspace/runtime/input/sampl.stl"
@@ -135,7 +135,7 @@ To upgrade the dependencies simply execute
 pip-compile --all-extras --output-file=requirements.txt --upgrade requirements.in
 ```
 
-Finally, perforfmance critical packages such as Numpy and Numba are installed via conda to utilize BLAS libraries.
+Finally, performance critical packages such as Numpy and Numba are installed via conda to utilize BLAS libraries.
 
 ## Contributing
 
