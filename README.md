@@ -39,7 +39,7 @@ git clone https://github.com/davidrudlstorfer/obscura.git
 3. **Prepare input files and configuration:**
 ```
 mkdir ./render/input
-cp ./obscura/src/obscura/configs ./render/configs
+cp -r ./obscura/src/obscura/configs ./render/configs
 ```
 4. **Docker image building (Docker Desktop must be running):**
 - Open the entrypoint.sh file and make sure the line endings are set to LF and not CRLF (in VSCode bottom right of editor).
