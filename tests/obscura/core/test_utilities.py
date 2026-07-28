@@ -7,7 +7,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 import yaml
-from munch import munchify
 
 from obscura.core.utilities import RunManager
 
@@ -47,31 +46,28 @@ def test_write_config(tmp_path: Path) -> None:
     Args:
         tmp_path (Path): Temporary from pytest.
     """
-    mock_config = munchify(
-        {
-            "general": {
-                "output_directory": str(tmp_path),
-                "sim_name": "sim_name",
-            }
+    config_dict = {
+        "general": {
+            "output_directory": str(tmp_path),
+            "sim_name": "sim_name",
         }
-    )
+    }
+    mock_config = MagicMock()
+    mock_config.general.output_directory = str(tmp_path)
+    mock_config.general.sim_name = "sim_name"
+    mock_config.model_dump.return_value = config_dict
 
     run_manager = RunManager(mock_config)
 
     run_manager.write_config()
 
     with open(os.path.join(tmp_path, "sim_name", "config.yaml"), "r") as file:
-        assert file.read() == yaml.dump(mock_config.toDict())
+        assert file.read() == yaml.dump(config_dict)
 
     # check invalid input parameter combination
-    mock_config = munchify(
-        {
-            "general": {
-                "output_directory": None,
-                "sim_name": None,
-            }
-        }
-    )
+    mock_config = MagicMock()
+    mock_config.general.output_directory = None
+    mock_config.general.sim_name = None
     run_manager = RunManager(mock_config)
     with pytest.raises(
         ValueError, match="Output directory and sim name must be provided for output!"
