@@ -17,7 +17,6 @@ def run_obscura(config: Any) -> None:
         config: Munch type object containing all configs for current
         run. Config options can be called via attribute-style access.
     """
-
     # Time
     start_time = time.time()
 

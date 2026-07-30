@@ -14,7 +14,6 @@ from obscura.core.utilities import RunManager
 
 def test_run_manager_init_run() -> None:
     """Test run manager init_run function."""
-
     mock_config = MagicMock()
 
     with (
@@ -48,7 +47,6 @@ def test_write_config(tmp_path: Path) -> None:
     Args:
         tmp_path (Path): Temporary from pytest.
     """
-
     mock_config = munchify(
         {
             "general": {
@@ -83,7 +81,6 @@ def test_write_config(tmp_path: Path) -> None:
 
 def test_run_manager_finish_run() -> None:
     """Test run manager finish_run function."""
-
     mock_config = MagicMock()
 
     with (

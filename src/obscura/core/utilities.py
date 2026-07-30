@@ -6,7 +6,6 @@ import time
 from typing import Any
 
 import yaml
-
 from pytoda.logger import log_full_width, print_header, setup_logging
 
 log = logging.getLogger("obscura")
@@ -20,7 +19,6 @@ class RunManager:
 
     def init_run(self) -> None:
         """Set up Obscura run including logger."""
-
         setup_logging(
             self.config.general.log_to_console,
             self.config.general.log_file,
@@ -41,7 +39,6 @@ class RunManager:
     def write_config(self) -> None:
         """Export and write current setup config to .yaml file for future
         reference."""
-
         log.info("Writing input config to file ...")
         log.info("")
 
@@ -81,7 +78,6 @@ class RunManager:
         Args:
             start_time: time when run started
         """
-
         log_full_width()
         log.info(f"Run took {time.time() - start_time} s.")
         log_full_width("RUN FINISHED")
