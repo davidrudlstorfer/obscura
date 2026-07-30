@@ -26,7 +26,6 @@ log = logging.getLogger("obscura")
 
 def rendering_pipeline(config: Any) -> None:
     """Rendering script for Obscura."""
-
     # Start empty scene
     bpy.ops.wm.read_factory_settings(use_empty=True)
 

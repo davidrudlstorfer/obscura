@@ -16,7 +16,6 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
     Args:
         tmp_path (Path): Temporary path from pytest.
     """
-
     mock_config_data = {"key": "value"}
     config_file_path = tmp_path / "test_config.yaml"
     with open(config_file_path, "w") as f:
@@ -38,7 +37,6 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
 
 def test_main_config_file_not_exists() -> None:
     """Test main when config does not exist."""
-
     with patch(
         "argparse.ArgumentParser.parse_args",
         return_value=MagicMock(config_file_path="nonexistent_config.yaml"),

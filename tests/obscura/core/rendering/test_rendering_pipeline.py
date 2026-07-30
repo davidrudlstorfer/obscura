@@ -7,7 +7,6 @@ from obscura.core.rendering.rendering_pipeline import rendering_pipeline
 
 def test_rendering_pipeline_calls_all_steps() -> None:
     """Test that rendering pipeline calls all steps in correct order."""
-
     mock_config = MagicMock()
     mock_mesh = MagicMock()
     mock_center = (0, 0, 0)

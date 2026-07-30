@@ -37,13 +37,13 @@ repos:
       - id: trailing-whitespace
         name: Check for trailing whitespaces
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.8.6
+    rev: 1.9.4
     hooks:
       - id: bandit
         name: Run bandit (security linter for python)
         args: ["--exclude", "tests/*"]
   - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.7
+    rev: v1.7.8
     hooks:
       - id: docformatter
         name: Run docformatter (formatter for docstrings)
@@ -55,7 +55,7 @@ repos:
         name: Run interrogate (linter for docstrings)
         args: [--fail-under=100, --ignore-init-module, --style=google, -vv]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.17.1
+    rev: v2.3.0
     hooks:
       - id: mypy
         name: Run mypy (static type checker for python)
@@ -67,7 +67,7 @@ repos:
       - id: removestar
         name: Run removestar (remove wildcard imports)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.12
+    rev: v0.16.0
     hooks:
       - id: ruff # linter
         name: Run ruff (linter for Python)
@@ -75,7 +75,7 @@ repos:
       - id: ruff-format # formatter
         name: Run ruff (formatter for Python)
   - repo: https://github.com/crate-ci/typos
-    rev: v1.36.2
+    rev: v1.48.0
     hooks:
       - id: typos
         name: Run typo checker
@@ -86,7 +86,7 @@ repos:
         name: Run xml-formatter
         args: [--indent, "2", --indent-char, " ", --selfclose, --overwrite, --eof-newline]
   - repo: https://github.com/google/yamlfmt
-    rev: v0.17.2
+    rev: v0.21.0
     hooks:
       - id: yamlfmt
         name: Run yamlfmt
