@@ -15,7 +15,6 @@ def main() -> None:
     Raises:
         RuntimeError: If provided config is not a valid file.
     """
-
     parser = argparse.ArgumentParser(description="Execute Obscura")
     parser.add_argument(
         "--config_file_path",

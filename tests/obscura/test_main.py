@@ -10,7 +10,11 @@ from obscura.main import main
 
 
 def test_main_config_file_exists(tmp_path: Path) -> None:
-    """Test main when config exists."""
+    """Test main when config exists.
+
+    Args:
+        tmp_path (Path): Temporary path from pytest.
+    """
 
     # Use the existing valid configuration as test input
     with open("src/obscura/configs/params.yaml", "r") as file:

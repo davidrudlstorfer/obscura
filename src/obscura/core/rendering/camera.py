@@ -13,7 +13,6 @@ def setup_camera(
     max_extent: float,
 ) -> None:
     """Create and configure camera settings."""
-
     bpy.ops.object.camera_add(  # Automatic camera setup
         location=(center + [0, -2 * max_extent, max_extent]).tolist()
     )
