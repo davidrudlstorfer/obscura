@@ -10,7 +10,11 @@ from obscura.core.run import run_obscura
 
 
 def main() -> None:
-    """Call Obscura runner with config."""
+    """Call Obscura runner with config.
+
+    Raises:
+        RuntimeError: If provided config is not a valid file.
+    """
 
     parser = argparse.ArgumentParser(description="Execute Obscura")
     parser.add_argument(
