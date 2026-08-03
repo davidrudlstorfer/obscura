@@ -29,19 +29,16 @@ The remaining parts of the readme are structured as follows:
 
 ## Setup and Installation
 
-There are two ways to set up Obscura, depending on whether you want to run everything natively on your machine or inside a Docker container. Both options share a few common steps (cloning the repo and preparing the input/config folders); after that, follow the instructions for the option you want.
+There are multiple ways to set up Obscura, depending on whether you want to run everything natively on your machine or inside a Docker container. All options share a few common steps (cloning the repo and preparing the input/config folders); after that, follow the instructions for the option you want.
 
 - **Option A: Local installation** – install Python dependencies via conda and use a local Blender install.
 - **Option B: Docker** – run Obscura inside a self-contained container, without needing a local Blender install.
 
 ### Common Steps
 
-**Prerequisites:**
-- Install [Git](https://git-scm.com/install/)
 
-**Steps:**
 
-1. Clone the repository in your desired folder. This folder will be called folder `X` from now on.
+1. Clone the repository
 ```
 git clone https://github.com/davidrudlstorfer/obscura.git
 ```
@@ -90,7 +87,7 @@ or install the pinned versions with:
 pip install -e ."[safe]"
 ```
 
-- Now you are up and running 🎉 Continue with [Execution](#execution).
+- Now you are up and running 🎉
 
 ### Option B: Docker
 
@@ -99,27 +96,23 @@ pip install -e ."[safe]"
 
 There are two ways to get the Docker image:
 
-- **Pull the pre-built image (coming soon):** once [#3](https://github.com/davidrudlstorfer/obscura/issues/3) is resolved.
 - **Build the image yourself:** follow the steps below.
 
 **Steps to build the Docker image yourself:**
 
-1. Open the `entrypoint.sh` file and make sure the line endings are set to LF and not CRLF (in VSCode, bottom right of editor). Save the file.
 
-2. Build the Docker image:
+1. Build the Docker image:
 ```
 docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 ```
 
-- Now you are up and running 🎉 Continue with [Execution](#execution).
+- Now you are up and running 🎉
 
 ## Execution
 
-The following steps apply regardless of which installation option you chose above.
-
 ### Configure the render
 
-- Configure the `params.yaml` file located in `X/render/configs` as desired (where `X` is the folder you cloned the repository into).
+- Configure the `params.yaml` file located in `/render/configs` as desired
 - Update the input and output filepaths in the `params.yaml` file:
 ```
   input_file_path: "/workspace/runtime/input/sample.stl"
@@ -133,12 +126,11 @@ The following steps apply regardless of which installation option you chose abov
 ```
 obscura --config_file_path=./render/configs/params.yaml
 ```
-Adjust the path to `params.yaml` if your folder `X` is located elsewhere.
 - **If you installed via Docker (Option B):** run the container on a mounted volume:
 ```
 docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
 ```
-Replace `<PROJECT_PATH>` with the path to your local repository, folder `X`.
+Replace `<PROJECT_PATH>` with the path to your local repository.
 
 ### Verify the output
 
