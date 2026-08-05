@@ -15,7 +15,6 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
     Args:
         tmp_path (Path): Temporary path from pytest.
     """
-
     # Use the existing valid configuration as test input
     with open("src/obscura/configs/params.yaml", "r") as file:
         mock_config_data = yaml.safe_load(file)
@@ -28,9 +27,7 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
     with (
         patch(
             "argparse.ArgumentParser.parse_args",
-            return_value=MagicMock(
-                config_file_path=str(config_file_path)
-            ),
+            return_value=MagicMock(config_file_path=str(config_file_path)),
         ),
         patch("obscura.main.run_obscura") as mock_run_obscura,
     ):
@@ -46,12 +43,9 @@ def test_main_config_file_exists(tmp_path: Path) -> None:
 
 def test_main_config_file_not_exists() -> None:
     """Test main when config does not exist."""
-
     with patch(
         "argparse.ArgumentParser.parse_args",
-        return_value=MagicMock(
-            config_file_path="nonexistent_config.yaml"
-        ),
+        return_value=MagicMock(config_file_path="nonexistent_config.yaml"),
     ):
         with pytest.raises(
             RuntimeError,

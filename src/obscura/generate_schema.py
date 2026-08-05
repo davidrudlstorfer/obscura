@@ -7,7 +7,6 @@ from obscura.core.config_model import Configuration
 
 def generate_schema() -> None:
     """Generate and save JSON schema."""
-
     schema = Configuration.model_json_schema()
 
     with open("config_schema.json", "w") as file:

@@ -1,8 +1,11 @@
 """Pydantic models for Obscura configuration."""
+
 from pydantic import BaseModel
 
-# Create a Pydantic model for validating customer support input
+
 class General(BaseModel):
+    """General application configuration."""
+
     output_directory: str
     sim_name: str
     log_file: str
@@ -12,29 +15,39 @@ class General(BaseModel):
 
 
 class ObjectSettings(BaseModel):
+    """Configuration for the rendered object."""
+
     mesh_scale: list[float]
     mesh_location: list[float]
     rotation: list[int]
 
 
 class Material(BaseModel):
+    """Material properties used for rendering."""
+
     material_color: list[float]
     material_roughness: float
     material_metallic: float
 
 
 class Light(BaseModel):
+    """Lighting configuration."""
+
     key_light_intensity: float
     fill_light_intensity: float
     ambient_light_strength: float
 
 
 class Camera(BaseModel):
+    """Camera configuration."""
+
     lens: int
     type: str
 
 
 class Preview(BaseModel):
+    """Preview rendering settings."""
+
     mode: bool
     resolution_x: int
     resolution_y: int
@@ -44,6 +57,8 @@ class Preview(BaseModel):
 
 
 class Render(BaseModel):
+    """Final rendering configuration."""
+
     preview: Preview
     resolution_x: int
     resolution_y: int
@@ -52,6 +67,8 @@ class Render(BaseModel):
 
 
 class Configuration(BaseModel):
+    """Root configuration model for Obscura."""
+
     general: General
     object_settings: ObjectSettings
     background_color: list[float]
