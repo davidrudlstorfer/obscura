@@ -18,6 +18,7 @@ The remaining parts of the readme are structured as follows:
 - [Installation](#installation)
 - [Execution](#execution)
   - [Execute Obscura](#execute-obscura)
+  - [Generate configuration schema](#generate-configuration-schema)
   - [Run testing framework and create coverage report](#run-testing-framework-and-create-coverage-report)
   - [Create documentation](#create-documentation)
 - [Dependency Management](#dependency-management)
@@ -71,11 +72,33 @@ pip install -e ."[safe]"
 
 TBD
 
+### Generate configuration schema
+
+The JSON schema for the configuration file can be generated using:
+
+```bash
+python src/obscura/generate_schema.py
+```
+
+This will create the `config_schema.json` file in the project root directory.
+
+The generated schema can be used by VS Code to provide YAML validation and autocompletion for configuration files.
+
+To enable schema validation in VS Code, add the following entry to your `settings.json`:
+
+```json
+{
+    "yaml.schemas": {
+        "./config_schema.json": "**/params.yaml"
+    }
+}
+```
+
 ### Run testing framework and create coverage report
 
 To locally execute the tests and create the html coverage report simply run
 
-```
+```bash
 pytest
 ```
 
