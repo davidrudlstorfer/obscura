@@ -4,8 +4,8 @@ import argparse
 import os
 
 import yaml
-from munch import munchify
 
+from obscura.core.config_model import Configuration
 from obscura.core.run import run_obscura
 
 
@@ -23,16 +23,17 @@ def main() -> None:
         type=str,
         required=True,
     )
+
     args = parser.parse_args()
 
     if not os.path.isfile(args.config_file_path):
         raise RuntimeError("Config file not found! Obscura can not be executed!")
 
-    # load config and convert to simple namespace for easier access
     with open(args.config_file_path, "r") as file:
-        config = munchify(yaml.safe_load(file))
+        data = yaml.safe_load(file)
 
-    # execute obscura
+    config = Configuration.model_validate(data)
+
     run_obscura(config)
 
 
