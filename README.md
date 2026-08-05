@@ -6,6 +6,7 @@
 |-------------------------------------------------- | -------: | -------: | ------: | --------: |
 | src/obscura/\_\_init\_\_.py                       |        0 |        0 |    100% |           |
 | src/obscura/core/\_\_init\_\_.py                  |        0 |        0 |    100% |           |
+| src/obscura/core/config\_model.py                 |        9 |        0 |    100% |           |
 | src/obscura/core/convert\_vtu\_to\_stl.py         |       15 |       15 |      0% |      3-26 |
 | src/obscura/core/rendering/\_\_init\_\_.py        |        0 |        0 |    100% |           |
 | src/obscura/core/rendering/background.py          |        9 |        6 |     33% |     10-15 |
@@ -17,8 +18,9 @@
 | src/obscura/core/rendering/rendering\_pipeline.py |       23 |        0 |    100% |           |
 | src/obscura/core/run.py                           |       12 |        0 |    100% |           |
 | src/obscura/core/utilities.py                     |       33 |        2 |     94% |     88-89 |
-| src/obscura/main.py                               |       14 |        0 |    100% |           |
-| **TOTAL**                                         |  **195** |   **90** | **54%** |           |
+| src/obscura/generate\_schema.py                   |        8 |        8 |      0% |      3-17 |
+| src/obscura/main.py                               |       15 |        0 |    100% |           |
+| **TOTAL**                                         |  **213** |   **98** | **54%** |           |
 
 
 ## Setup coverage badge
