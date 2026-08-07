@@ -1,5 +1,5 @@
 # This file contains all the requirements for Obscura
-munch
+pydantic
 numba
 numpy
 pdoc

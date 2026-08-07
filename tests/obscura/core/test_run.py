@@ -9,7 +9,6 @@ from obscura.core.run import run_obscura
 
 def test_run_obscura() -> None:
     """Test run procedure of Obscura."""
-
     mock_config = munchify({"key": "value"})
 
     mock_run_manager = MagicMock()

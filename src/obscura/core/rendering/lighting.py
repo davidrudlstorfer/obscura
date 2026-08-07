@@ -8,7 +8,6 @@ import numpy as np
 
 def setup_lighting(center: np.ndarray, max_extent: float, config: Any) -> None:
     """Set up three-point lighting using SUN lights."""
-
     # Key light
     bpy.ops.object.light_add(
         type="SUN",
