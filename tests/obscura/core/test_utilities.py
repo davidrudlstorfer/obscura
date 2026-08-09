@@ -7,8 +7,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 import yaml
-from munch import munchify
 
+from obscura.core.config_model import Configuration
 from obscura.core.utilities import RunManager
 
 
@@ -45,36 +45,83 @@ def test_write_config(tmp_path: Path) -> None:
     """Test write_config function.
 
     Args:
-        tmp_path (Path): Temporary from pytest.
+        tmp_path (Path): Temporary directory from pytest.
     """
-    mock_config = munchify(
-        {
-            "general": {
-                "output_directory": str(tmp_path),
-                "sim_name": "sim_name",
-            }
-        }
+    mock_config = Configuration(
+        general={
+            "output_directory": str(tmp_path),
+            "sim_name": "sim_name",
+            "log_file": "test.log",
+            "log_to_console": True,
+            "input_file_path": "input.stl",
+            "output_file_path": "output.png",
+        },
+        object_settings={
+            "mesh_scale": [1.0, 1.0, 1.0],
+            "mesh_location": [0.0, 0.0, 0.0],
+            "rotation": [0, 0, 0],
+        },
+        background_color=[1.0, 1.0, 1.0, 1.0],
+        material={
+            "material_color": [0.07, 0.28, 0.55, 1.0],
+            "material_roughness": 0.5,
+            "material_metallic": 0.0,
+        },
+        light={
+            "key_light_intensity": 3.0,
+            "fill_light_intensity": 1.25,
+            "ambient_light_strength": 0.2,
+        },
+        camera={
+            "lens": 35,
+            "type": "PERSP",
+        },
+        render={
+            "preview": {
+                "mode": False,
+                "resolution_x": 960,
+                "resolution_y": 600,
+                "engine": "CYCLES",
+                "samples": 32,
+                "use_denoising": True,
+            },
+            "resolution_x": 1920,
+            "resolution_y": 1200,
+            "engine": "CYCLES",
+            "samples": 128,
+        },
     )
 
     run_manager = RunManager(mock_config)
 
     run_manager.write_config()
 
-    with open(os.path.join(tmp_path, "sim_name", "config.yaml"), "r") as file:
-        assert file.read() == yaml.dump(mock_config.toDict())
+    config_path = os.path.join(
+        tmp_path,
+        "sim_name",
+        "config.yaml",
+    )
 
-    # check invalid input parameter combination
-    mock_config = munchify(
-        {
-            "general": {
-                "output_directory": None,
-                "sim_name": None,
-            }
+    with open(config_path, "r") as file:
+        assert yaml.safe_load(file) == mock_config.model_dump()
+
+    # Check invalid input parameter combination.
+    invalid_config = mock_config.model_copy(
+        update={
+            "general": mock_config.general.model_copy(
+                update={
+                    "output_directory": None,
+                    "sim_name": None,
+                }
+            )
         }
     )
-    run_manager = RunManager(mock_config)
+
+    run_manager = RunManager(invalid_config)
+
     with pytest.raises(
-        ValueError, match="Output directory and sim name must be provided for output!"
+        ValueError,
+        match="Output directory and sim name must be provided for output!",
     ):
         run_manager.write_config()
 
