@@ -6,6 +6,7 @@ performs a final render using Blender.
 """
 
 import logging
+import os
 from typing import Any
 
 import bpy
@@ -26,26 +27,31 @@ log = logging.getLogger("obscura")
 
 def rendering_pipeline(config: Any) -> None:
     """Rendering script for Obscura."""
-    # Start empty scene
-    bpy.ops.wm.read_factory_settings(use_empty=True)
+    input_file_path = config.general.input_file_path
 
-    # Object loading and transformation from object_settings.py
-    mesh_obj = load_mesh(config)  # Import STL mesh
-    apply_transforms(mesh_obj, config)
-    center, max_extent = compute_geometry(mesh_obj)
+    if os.path.splitext(input_file_path)[1].lower() == ".blend":
+        bpy.ops.wm.open_mainfile(filepath=input_file_path)
+    else:
+        # Start empty scene
+        bpy.ops.wm.read_factory_settings(use_empty=True)
 
-    # Camera set-up from camera.py
-    setup_camera(config, mesh_obj, center, max_extent)
+        # Object loading and transformation from object_settings.py
+        mesh_obj = load_mesh(config)
+        apply_transforms(mesh_obj, config)
+        center, max_extent = compute_geometry(mesh_obj)
 
-    # Ambient world from background.py and lighting.py
-    define_background(config)
-    ambient_lighting(config)
+        # Camera set-up from camera.py
+        setup_camera(config, mesh_obj, center, max_extent)
 
-    # Automatic lighting setup (simple SUNs) from lighting.py
-    setup_lighting(center, max_extent, config)
+        # Ambient world from background.py
+        define_background(config)
+        ambient_lighting(config)
 
-    # Apply defined material properties from material.py
-    apply_material(mesh_obj, config)
+        # Automatic lighting setup (simple SUNs) from lighting.py
+        setup_lighting(center, max_extent, config)
+
+        # Apply defined material properties from material.py
+        apply_material(mesh_obj, config)
 
     # Render settings & execution
     scene = bpy.context.scene
