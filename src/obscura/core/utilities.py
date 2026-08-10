@@ -66,7 +66,7 @@ class RunManager:
             ),
             "w",
         ) as file:
-            yaml.dump(self.config.toDict(), file)
+            yaml.dump(self.config.model_dump(), file)
 
         log.info("     ... done.")
         log.info("")

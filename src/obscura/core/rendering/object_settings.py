@@ -30,5 +30,5 @@ def compute_geometry(mesh_obj: bpy.types.Object) -> tuple[np.ndarray, float]:
     """Compute bounding box center and maximum extent."""
     bbox = np.asarray(mesh_obj.bound_box)
     center = bbox.mean(axis=0)
-    max_extent = bbox.ptp(axis=0).max()
+    max_extent = np.ptp(bbox, axis=0).max()
     return center, max_extent

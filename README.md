@@ -81,10 +81,6 @@ git submodule --quiet foreach --recursive pip install -e .
 
 5. Install all Obscura requirements (latest versions):
 ```
-pip install -e .
-```
-or install the pinned versions with:
-```
 pip install -e ."[safe]"
 ```
 
