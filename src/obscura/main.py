@@ -5,7 +5,7 @@ import os
 
 import yaml
 
-from obscura.core.config_model import Configuration
+from obscura.core.config_model import BlendConfiguration, Configuration
 from obscura.core.run import run_obscura
 
 
@@ -32,7 +32,12 @@ def main() -> None:
     with open(args.config_file_path, "r") as file:
         data = yaml.safe_load(file)
 
-    config = Configuration.model_validate(data)
+    input_file_path = data["general"]["input_file_path"]
+
+    if os.path.splitext(input_file_path)[1].lower() == ".blend":
+        config = BlendConfiguration.model_validate(data)
+    else:
+        config = Configuration.model_validate(data)
 
     run_obscura(config)
 

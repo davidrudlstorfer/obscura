@@ -41,10 +41,11 @@ def rendering_pipeline(config: Any) -> None:
         # Camera set-up from camera.py
         setup_camera(config, mesh_obj, center, max_extent)
 
+        # Background and ambient lighting
         define_background(config)
         ambient_lighting(config)
 
-        # Automatic lighting setup (simple SUNs) from lighting.py
+        # Automatic lighting setup (simple SUNs)
         setup_lighting(center, max_extent, config)
 
         # Apply defined material properties from material.py

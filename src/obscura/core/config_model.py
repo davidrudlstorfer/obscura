@@ -76,3 +76,10 @@ class Configuration(BaseModel):
     light: Light
     camera: Camera
     render: Render
+
+
+class BlendConfiguration(BaseModel):
+    """Configuration for rendering a Blender file."""
+
+    general: General
+    render: Render
