@@ -1,6 +1,6 @@
 """Rendering pipeline.
 
-This module loads a 3D mesh, applies user‑defined transformations,
+This module loads a 3D mesh, applies user-defined transformations,
 configures camera and lighting automatically, assigns materials, and
 performs a final render using Blender.
 """
@@ -27,10 +27,8 @@ log = logging.getLogger("obscura")
 
 def rendering_pipeline(config: Any) -> None:
     """Rendering script for Obscura."""
-    input_file_path = config.general.input_file_path
-
-    if os.path.splitext(input_file_path)[1].lower() == ".blend":
-        bpy.ops.wm.open_mainfile(filepath=input_file_path)
+    if os.path.splitext(config.general.input_file_path)[1].lower() == ".blend":
+        bpy.ops.wm.open_mainfile(filepath=config.general.input_file_path)
     else:
         # Start empty scene
         bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -43,7 +41,6 @@ def rendering_pipeline(config: Any) -> None:
         # Camera set-up from camera.py
         setup_camera(config, mesh_obj, center, max_extent)
 
-        # Ambient world from background.py
         define_background(config)
         ambient_lighting(config)
 
