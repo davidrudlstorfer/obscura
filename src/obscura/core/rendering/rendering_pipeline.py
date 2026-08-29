@@ -1,11 +1,12 @@
 """Rendering pipeline.
 
-This module loads a 3D mesh, applies user‑defined transformations,
+This module loads a 3D mesh, applies user-defined transformations,
 configures camera and lighting automatically, assigns materials, and
 performs a final render using Blender.
 """
 
 import logging
+import os
 from typing import Any
 
 import bpy
@@ -26,26 +27,29 @@ log = logging.getLogger("obscura")
 
 def rendering_pipeline(config: Any) -> None:
     """Rendering script for Obscura."""
-    # Start empty scene
-    bpy.ops.wm.read_factory_settings(use_empty=True)
+    if os.path.splitext(config.general.input_file_path)[1].lower() == ".blend":
+        bpy.ops.wm.open_mainfile(filepath=config.general.input_file_path)
+    else:
+        # Start empty scene
+        bpy.ops.wm.read_factory_settings(use_empty=True)
 
-    # Object loading and transformation from object_settings.py
-    mesh_obj = load_mesh(config)  # Import STL mesh
-    apply_transforms(mesh_obj, config)
-    center, max_extent = compute_geometry(mesh_obj)
+        # Object loading and transformation from object_settings.py
+        mesh_obj = load_mesh(config)
+        apply_transforms(mesh_obj, config)
+        center, max_extent = compute_geometry(mesh_obj)
 
-    # Camera set-up from camera.py
-    setup_camera(config, mesh_obj, center, max_extent)
+        # Camera set-up from camera.py
+        setup_camera(config, mesh_obj, center, max_extent)
 
-    # Ambient world from background.py and lighting.py
-    define_background(config)
-    ambient_lighting(config)
+        # Background and ambient lighting
+        define_background(config)
+        ambient_lighting(config)
 
-    # Automatic lighting setup (simple SUNs) from lighting.py
-    setup_lighting(center, max_extent, config)
+        # Automatic lighting setup (simple SUNs)
+        setup_lighting(center, max_extent, config)
 
-    # Apply defined material properties from material.py
-    apply_material(mesh_obj, config)
+        # Apply defined material properties from material.py
+        apply_material(mesh_obj, config)
 
     # Render settings & execution
     scene = bpy.context.scene
