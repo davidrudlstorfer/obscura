@@ -124,8 +124,14 @@ docker build --no-cache -f docker/Dockerfile -t blender-render-image .
 obscura --config_file_path=./render/configs/params.yaml
 ```
 - **If you installed via Docker (Option B):** run the container on a mounted volume:
+
+Without a GPU, or to force CPU rendering:
 ```
-docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
+ docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
+ ```
+ With an NVIDIA GPU:
+```
+ docker run --rm --gpus all -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
 ```
 Replace `<PROJECT_PATH>` with the path to your local repository.
 
