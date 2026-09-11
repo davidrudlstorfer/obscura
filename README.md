@@ -128,10 +128,19 @@ obscura --config_file_path=./render/configs/params.yaml
 Without a GPU, or to force CPU rendering:
 ```
  docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
- ```
+```
  With an NVIDIA GPU:
 ```
  docker run --rm --gpus all -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
+```
+If running on an HPC cluster without Docker (via Singularity/Apptainer):
+- Pull and convert the already-built image:
+```
+singularity pull obscura.sif docker://<dockerhub-username>/obscura:latest
+```
+- Then run it with GPU access:
+```
+singularity run --nv -B "<PROJECT_PATH>/render:/workspace/runtime" obscura.sif --config_file_path=/workspace/runtime/configs/params.yaml
 ```
 Replace `<PROJECT_PATH>` with the path to your local repository.
 
