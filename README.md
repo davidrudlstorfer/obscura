@@ -14,13 +14,13 @@
 | src/obscura/core/rendering/lighting.py            |       23 |       18 |     22% |12-37, 42-48 |
 | src/obscura/core/rendering/material.py            |       11 |        8 |     27% |     10-18 |
 | src/obscura/core/rendering/object\_settings.py    |       17 |       11 |     35% |12-14, 19-26, 31-34 |
-| src/obscura/core/rendering/render\_settings.py    |       24 |       20 |     17% |     11-37 |
+| src/obscura/core/rendering/render\_settings.py    |       41 |       34 |     17% |15-34, 39-67 |
 | src/obscura/core/rendering/rendering\_pipeline.py |       23 |        0 |    100% |           |
 | src/obscura/core/run.py                           |       12 |        0 |    100% |           |
 | src/obscura/core/utilities.py                     |       33 |        2 |     94% |     88-89 |
 | src/obscura/generate\_schema.py                   |        8 |        8 |      0% |      3-17 |
 | src/obscura/main.py                               |       15 |        0 |    100% |           |
-| **TOTAL**                                         |  **213** |   **98** | **54%** |           |
+| **TOTAL**                                         |  **230** |  **112** | **51%** |           |
 
 
 ## Setup coverage badge
