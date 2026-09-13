@@ -1,6 +1,8 @@
 """Pydantic models for Obscura configuration."""
 
-from pydantic import BaseModel
+from pathlib import Path
+
+from pydantic import BaseModel, model_validator
 
 
 class General(BaseModel):
@@ -70,9 +72,34 @@ class Configuration(BaseModel):
     """Root configuration model for Obscura."""
 
     general: General
-    object_settings: ObjectSettings
-    background_color: list[float]
-    material: Material
-    light: Light
-    camera: Camera
-    render: Render
+    object_settings: ObjectSettings | None = None
+    background_color: list[float] | None = None
+    material: Material | None = None
+    light: Light | None = None
+    camera: Camera | None = None
+    render: Render | None = None
+
+    @model_validator(mode="after")  # type: ignore[untyped-decorator]
+    def validate_required_settings(self) -> "Configuration":
+        """Require rendering settings for non-Blender input files."""
+        if Path(self.general.input_file_path).suffix.lower() != ".blend":
+            required_fields = [
+                "object_settings",
+                "background_color",
+                "material",
+                "light",
+                "camera",
+                "render",
+            ]
+
+            missing_fields = [
+                field for field in required_fields if getattr(self, field) is None
+            ]
+
+            if missing_fields:
+                raise ValueError(
+                    "Missing required configuration fields: "
+                    + ", ".join(missing_fields)
+                )
+
+        return self

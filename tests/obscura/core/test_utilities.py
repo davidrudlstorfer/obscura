@@ -44,7 +44,7 @@ def test_write_config(tmp_path: Path) -> None:
     """Test write_config function.
 
     Args:
-        tmp_path (Path): Temporary from pytest.
+        tmp_path (Path): Temporary directory from pytest.
     """
     config_dict = {
         "general": {
@@ -61,16 +61,22 @@ def test_write_config(tmp_path: Path) -> None:
 
     run_manager.write_config()
 
-    with open(os.path.join(tmp_path, "sim_name", "config.yaml"), "r") as file:
-        assert file.read() == yaml.dump(config_dict)
+    config_path = os.path.join(
+        tmp_path,
+        "sim_name",
+        "config.yaml",
+    )
 
-    # check invalid input parameter combination
-    mock_config = MagicMock()
+    with open(config_path, "r") as file:
+        assert yaml.safe_load(file) == mock_config.model_dump()
+
+    # Check invalid input parameter combination.
     mock_config.general.output_directory = None
     mock_config.general.sim_name = None
-    run_manager = RunManager(mock_config)
+
     with pytest.raises(
-        ValueError, match="Output directory and sim name must be provided for output!"
+        ValueError,
+        match="Output directory and sim name must be provided for output!",
     ):
         run_manager.write_config()
 
