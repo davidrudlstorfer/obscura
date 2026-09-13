@@ -125,7 +125,7 @@ obscura --config_file_path=./render/configs/params.yaml
 ```
 - **If you installed via Docker (Option B):** run the container on a mounted volume:
 ```
-docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image --config_file_path=/workspace/runtime/configs/params.yaml
+docker run --rm -v "<PROJECT_PATH>\render:/workspace/runtime" blender-render-image /workspace/runtime/configs/params.yaml
 ```
 Replace `<PROJECT_PATH>` with the path to your local repository.
 
