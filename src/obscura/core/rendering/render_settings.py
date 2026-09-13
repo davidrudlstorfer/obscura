@@ -33,5 +33,10 @@ def render(scene: bpy.types.Scene, config: Any) -> None:
             scene.cycles.samples = config.render.samples
             scene.cycles.use_denoising = True
 
-    # Render
+    bpy.ops.render.render(write_still=True)
+
+
+def render_blend(scene: bpy.types.Scene, config: Any) -> None:
+    """Render a Blender scene using its existing render settings."""
+    scene.render.filepath = config.general.output_file_path
     bpy.ops.render.render(write_still=True)

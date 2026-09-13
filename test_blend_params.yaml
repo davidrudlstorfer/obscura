@@ -5,16 +5,3 @@ general:
   log_to_console: true
   input_file_path: "/workspace/inputfiles/sample.blend"
   output_file_path: "/workspace/output/render_sample.png"
-
-render:
-  preview:
-    mode: false
-    resolution_x: 960
-    resolution_y: 600
-    engine: CYCLES
-    samples: 32
-    use_denoising: true
-  resolution_x: 1920
-  resolution_y: 1200
-  engine: CYCLES
-  samples: 128

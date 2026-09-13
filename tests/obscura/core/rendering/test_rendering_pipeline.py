@@ -47,6 +47,9 @@ def test_rendering_pipeline_calls_all_steps() -> None:
             "obscura.core.rendering.rendering_pipeline.apply_material"
         ) as mock_apply_material,
         patch("obscura.core.rendering.rendering_pipeline.render") as mock_render,
+        patch(
+            "obscura.core.rendering.rendering_pipeline.render_blend"
+        ) as mock_render_blend,
     ):
         # configure bpy scene
         mock_bpy.context.scene = mock_scene
@@ -79,6 +82,7 @@ def test_rendering_pipeline_calls_all_steps() -> None:
 
         # render
         mock_render.assert_called_once_with(mock_scene, mock_config)
+        mock_render_blend.assert_not_called()
 
 
 def test_rendering_pipeline_with_blend() -> None:
@@ -114,6 +118,9 @@ def test_rendering_pipeline_with_blend() -> None:
             "obscura.core.rendering.rendering_pipeline.apply_material"
         ) as mock_apply_material,
         patch("obscura.core.rendering.rendering_pipeline.render") as mock_render,
+        patch(
+            "obscura.core.rendering.rendering_pipeline.render_blend"
+        ) as mock_render_blend,
     ):
         mock_bpy.context.scene = mock_scene
 
@@ -134,4 +141,5 @@ def test_rendering_pipeline_with_blend() -> None:
         mock_setup_lighting.assert_not_called()
         mock_apply_material.assert_not_called()
 
-        mock_render.assert_called_once_with(mock_scene, mock_config)
+        mock_render.assert_not_called()
+        mock_render_blend.assert_called_once_with(mock_scene, mock_config)

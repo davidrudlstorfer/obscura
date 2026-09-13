@@ -20,7 +20,7 @@ from obscura.core.rendering.object_settings import (
     compute_geometry,
     load_mesh,
 )
-from obscura.core.rendering.render_settings import render
+from obscura.core.rendering.render_settings import render, render_blend
 
 log = logging.getLogger("obscura")
 
@@ -33,12 +33,12 @@ def rendering_pipeline(config: Any) -> None:
         # Start empty scene
         bpy.ops.wm.read_factory_settings(use_empty=True)
 
-        # Object loading and transformation from object_settings.py
+        # Object loading and transformation
         mesh_obj = load_mesh(config)
         apply_transforms(mesh_obj, config)
         center, max_extent = compute_geometry(mesh_obj)
 
-        # Camera set-up from camera.py
+        # Camera set-up
         setup_camera(config, mesh_obj, center, max_extent)
 
         # Background and ambient lighting
@@ -48,11 +48,15 @@ def rendering_pipeline(config: Any) -> None:
         # Automatic lighting setup (simple SUNs)
         setup_lighting(center, max_extent, config)
 
-        # Apply defined material properties from material.py
+        # Apply defined material properties
         apply_material(mesh_obj, config)
 
     # Render settings & execution
     scene = bpy.context.scene
-    render(scene, config)
+
+    if os.path.splitext(config.general.input_file_path)[1].lower() == ".blend":
+        render_blend(scene, config)
+    else:
+        render(scene, config)
 
     log.info("Render saved to " + str(scene.render.filepath))
