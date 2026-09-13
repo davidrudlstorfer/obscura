@@ -1,9 +1,37 @@
 """Rendering settings and final image generation in Blender."""
 
+import logging
 import os
 from typing import Any
 
 import bpy
+
+log = logging.getLogger("obscura")
+
+
+def _configure_render_device(scene: bpy.types.Scene) -> None:
+    """Enable GPU rendering for Cycles if a compatible device is available,
+    else fall back to CPU."""
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    prefs.get_devices()  # refresh the list of detected devices
+
+    # Prefer OptiX (uses RT cores, faster on Ada/RTX cards) over plain CUDA
+    device_type = next(
+        (t for t in ("OPTIX", "CUDA") if any(d.type == t for d in prefs.devices)),
+        None,
+    )
+
+    if device_type is None:
+        scene.cycles.device = "CPU"
+        log.info("No compatible GPU detected - rendering on CPU.")
+        return
+
+    prefs.compute_device_type = device_type
+    scene.cycles.device = "GPU"
+    for d in prefs.devices:
+        d.use = d.type == device_type
+
+    log.info(f"GPU detected - rendering on {device_type}.")
 
 
 def render(scene: bpy.types.Scene, config: Any) -> None:
@@ -22,6 +50,7 @@ def render(scene: bpy.types.Scene, config: Any) -> None:
         if scene.render.engine == "CYCLES":
             scene.cycles.samples = config.render.preview.samples
             scene.cycles.use_denoising = config.render.preview.use_denoising
+            _configure_render_device(scene)
         # Eevee Next has no configurable preview effects
 
     else:
@@ -32,6 +61,7 @@ def render(scene: bpy.types.Scene, config: Any) -> None:
         if scene.render.engine == "CYCLES":
             scene.cycles.samples = config.render.samples
             scene.cycles.use_denoising = True
+            _configure_render_device(scene)
 
     bpy.ops.render.render(write_still=True)
 
@@ -39,4 +69,8 @@ def render(scene: bpy.types.Scene, config: Any) -> None:
 def render_blend(scene: bpy.types.Scene, config: Any) -> None:
     """Render a Blender scene using its existing render settings."""
     scene.render.filepath = config.general.output_file_path
+
+    if scene.render.engine == "CYCLES":
+        _configure_render_device(scene)
+
     bpy.ops.render.render(write_still=True)
