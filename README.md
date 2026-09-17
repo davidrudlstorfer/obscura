@@ -46,7 +46,7 @@ git clone https://github.com/davidrudlstorfer/obscura.git
 
 2. Prepare input files and configuration:
 ```
-mkdir ./render/input
+mkdir ./render/inputfiles
 cp -r ./obscura/src/obscura/configs ./render/configs
 ```
 
