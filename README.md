@@ -6,7 +6,7 @@
 |-------------------------------------------------- | -------: | -------: | ------: | --------: |
 | src/obscura/\_\_init\_\_.py                       |        0 |        0 |    100% |           |
 | src/obscura/core/\_\_init\_\_.py                  |        0 |        0 |    100% |           |
-| src/obscura/core/config\_model.py                 |        9 |        0 |    100% |           |
+| src/obscura/core/config\_model.py                 |       15 |        0 |    100% |           |
 | src/obscura/core/convert\_vtu\_to\_stl.py         |       15 |       15 |      0% |      3-26 |
 | src/obscura/core/rendering/\_\_init\_\_.py        |        0 |        0 |    100% |           |
 | src/obscura/core/rendering/background.py          |        9 |        6 |     33% |     10-15 |
@@ -14,13 +14,13 @@
 | src/obscura/core/rendering/lighting.py            |       23 |       18 |     22% |12-37, 42-48 |
 | src/obscura/core/rendering/material.py            |       11 |        8 |     27% |     10-18 |
 | src/obscura/core/rendering/object\_settings.py    |       17 |       11 |     35% |12-14, 19-26, 31-34 |
-| src/obscura/core/rendering/render\_settings.py    |       41 |       34 |     17% |15-34, 39-67 |
-| src/obscura/core/rendering/rendering\_pipeline.py |       23 |        0 |    100% |           |
+| src/obscura/core/rendering/render\_settings.py    |       45 |       32 |     29% |15-34, 48-75 |
+| src/obscura/core/rendering/rendering\_pipeline.py |       26 |        0 |    100% |           |
 | src/obscura/core/run.py                           |       12 |        0 |    100% |           |
 | src/obscura/core/utilities.py                     |       33 |        2 |     94% |     88-89 |
 | src/obscura/generate\_schema.py                   |        8 |        8 |      0% |      3-17 |
 | src/obscura/main.py                               |       15 |        0 |    100% |           |
-| **TOTAL**                                         |  **230** |  **112** | **51%** |           |
+| **TOTAL**                                         |  **243** |  **110** | **55%** |           |
 
 
 ## Setup coverage badge
