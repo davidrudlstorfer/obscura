@@ -70,9 +70,9 @@ class Configuration(BaseModel):
     """Root configuration model for Obscura."""
 
     general: General
-    object_settings: ObjectSettings
-    background_color: list[float]
-    material: Material
-    light: Light
-    camera: Camera
-    render: Render
+    object_settings: ObjectSettings | None = None
+    background_color: list[float] | None = None
+    material: Material | None = None
+    light: Light | None = None
+    camera: Camera | None = None
+    render: Render | None = None

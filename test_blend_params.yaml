@@ -1,0 +1,7 @@
+general:
+  output_directory: output
+  sim_name: test_sim
+  log_file: obscura.log
+  log_to_console: true
+  input_file_path: "/workspace/inputfiles/sample.blend"
+  output_file_path: "/workspace/output/render_sample.png"
