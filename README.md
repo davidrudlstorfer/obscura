@@ -93,6 +93,14 @@ pip install -e ."[safe]"
 
 There are two ways to get the Docker image:
 
+- **Pull the prebuilt image:**
+
+```bash
+docker pull ghcr.io/davidrudlstorfer/obscura:latest
+```
+
+When using the prebuilt image, replace `blender-render-image` in the Docker commands below with `ghcr.io/davidrudlstorfer/obscura:latest`.
+
 - **Build the image yourself:** follow the steps below.
 
 **Steps to build the Docker image yourself:**
@@ -136,7 +144,7 @@ Without a GPU, or to force CPU rendering:
 If running on an HPC cluster without Docker (via Singularity/Apptainer):
 - Pull and convert the already-built image:
 ```
-singularity pull obscura.sif docker://<dockerhub-username>/obscura:latest
+singularity pull obscura.sif docker://ghcr.io/davidrudlstorfer/obscura:latest
 ```
 - Then run it with GPU access:
 ```
